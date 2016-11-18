@@ -1,0 +1,8 @@
+[package]
+name = "subte"
+version = "0.1.0"
+authors = ["MislankaNova <MislankaNova@hotmail.com>"]
+
+[dependencies.pancurses]
+version = "0.7.0"
+features = ["wide"]
