@@ -41,9 +41,6 @@ pub fn display_tile(win: &curses::Window, t: &types::Tile) {
 }
 
 pub fn display_map(win: &curses::Window, map: &types::Map) {
-    // This is a hack
-    // You must
-    win.border('x', 'x', 'x', 'x', 'x', 'x', 'x', 'x');
     for r in 0..min(map.height, MAP_DISPLAY_HEIGHT) {
         win.mv(r, 0);
         for c in 0..min(map.width, MAP_DISPLAY_WIDTH) {
