@@ -60,7 +60,7 @@ fn main () {
     loop {
         fourthrail.display();
 
-        match (window.getch()) {
+        match window.getch() {
             Some(curses::Input::Character('q')) => {
                 let exitw = curses::newwin(4, 40, 4, 4);
                 exitw.mv(1,1);
@@ -68,7 +68,7 @@ fn main () {
                 exitw.mv(2,1);
                 exitw.printw(langue::YN);
                 exitw.refresh();
-                match (window.getch()) {
+                match window.getch() {
                     Some(curses::Input::Character('y')) => break,
                     _                                   => continue
                 }
