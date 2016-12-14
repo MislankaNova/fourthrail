@@ -69,8 +69,9 @@ fn main () {
                 exitw.printw(langue::YN);
                 exitw.refresh();
                 match window.getch() {
-                    Some(curses::Input::Character('y')) => break,
-                    _                                   => continue
+                      Some(curses::Input::Character('y'))
+                    | Some(curses::Input::Character('Y')) => break,
+                    _                                     => continue
                 }
             }
 
