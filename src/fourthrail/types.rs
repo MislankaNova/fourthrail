@@ -7,10 +7,14 @@ extern crate pancurses as curses;
 use std::*;
 use fourthrail::*;
 
+/* Type names */
+
+type Display = (i16, char);
+
 /* Traits */
 
-trait CanDisplay {
-    fn display(&self);
+pub trait CanDisplay {
+    fn display(&self) -> Display;
 }
 
 /* Structs & Enums */
@@ -25,6 +29,15 @@ pub enum Tile {
         fore : i16,
         back : i16,
         pair : i16
+    }
+}
+
+impl CanDisplay for Tile {
+    fn display(&self) -> Display {
+        match self {
+            &Tile::Tile {pair: p, symbol: c, ..} => (p, c),
+            _ => (-1, ' '),
+        }
     }
 }
 
@@ -59,7 +72,7 @@ impl TileBuilder {
         }
     }
 
-    pub fn name(&mut self, name: &'static str) 
+    pub fn name(&mut self, name: &'static str)
                     -> &mut TileBuilder {
         self.name = name;
         self
@@ -74,8 +87,8 @@ impl TileBuilder {
     pub fn colour(&mut self,
                   pair: i16,
                   fore: i16,
-                  back: i16) 
-                      -> &mut TileBuilder { 
+                  back: i16)
+                      -> &mut TileBuilder {
         self.fore = fore;
         self.back = back;
         self.pair = pair;
@@ -86,7 +99,7 @@ impl TileBuilder {
 
 pub struct Map {
     pub height : i32,
-    pub width  : i32, 
+    pub width  : i32,
     pub level  : i32,
     pub name   : String,
     pub tiles  : [types::Tile ; 14400]
@@ -102,4 +115,3 @@ pub struct Status {
     dexterity   : i32,
     status      : collections::HashMap<&'static str, i32>
 }
-
