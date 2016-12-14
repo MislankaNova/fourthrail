@@ -39,18 +39,18 @@ pub fn init_display() {
         );
 }
 
-pub fn display_tile(win: &curses::Window, t: &types::Tile) {
+pub fn put_tile(win: &curses::Window, t: &types::Tile) {
     if let &types::Tile::Tile {pair: p, symbol: s, ..} = t {
         win.color_set(p);
         win.addch(s);
     }
 }
 
-pub fn display_map(win: &curses::Window, map: &types::Map) {
+pub fn put_map(win: &curses::Window, map: &types::Map) {
     for r in 0..min(map.height, MAP_DISPLAY_HEIGHT) {
         win.mv(r, 0);
         for c in 0..min(map.width, MAP_DISPLAY_WIDTH) {
-            display_tile(win, &map.tiles[(120 * r + c) as usize]);
+            put_tile(win, &map.tiles[(120 * r + c) as usize]);
         }
     }
     /* Then display level detail */
@@ -62,7 +62,7 @@ pub fn display_map(win: &curses::Window, map: &types::Map) {
     win.addstr(" <");
 }
 
-pub fn display_stats(win    : &curses::Window,
+pub fn put_stats(win    : &curses::Window,
                      coh    : &i32,
                      //status : &types::Status
                      ) {

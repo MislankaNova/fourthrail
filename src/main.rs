@@ -54,11 +54,11 @@ fn main () {
     curses::flash();
     window.getch();
 
-    fourthrail.display();
+    fourthrail.update_graphic();
 
     // Then enter the main loop
     loop {
-        fourthrail.display();
+        fourthrail.update_graphic();
 
         match window.getch() {
             Some(curses::Input::Character('q')) => {
