@@ -6,6 +6,8 @@ use std::cmp::*;
 
 use fourthrail::*;
 
+use fourthrail::types::CanDisplay;
+
 /* */
 
 
@@ -40,10 +42,9 @@ pub fn init_display() {
 }
 
 pub fn put_tile(win: &curses::Window, t: &types::Tile) {
-    if let &types::Tile::Tile {pair: p, symbol: s, ..} = t {
-        win.color_set(p);
-        win.addch(s);
-    }
+    let (p, c) = t.display();
+    win.color_set(p);
+    win.addch(c);
 }
 
 pub fn put_map(win: &curses::Window, map: &types::Map) {
