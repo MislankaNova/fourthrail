@@ -12,6 +12,7 @@ use fourthrail::*;
 const MAP_DISPLAY_WIDTH  : i32 = 60;
 const MAP_DISPLAY_HEIGHT : i32 = 22;
 
+const DISPLAY_NONE             : i16 = 0;
 const DISPLAY_MAP_NAME_COLOUR  : i16 = 21;
 const DISPLAY_STAT_NAME_COLOUR : i16 = 31;
 const DISPLAY_STAT_CAL_COLOUR  : i16 = 32;
@@ -21,6 +22,11 @@ const DISPLAY_COHERENCY_COLOUR : i16 = 34;
 /* */
 
 pub fn init_display() {
+    curses::init_pair(
+        DISPLAY_NONE,
+        -1,
+        -1
+        );
     curses::init_pair(
         DISPLAY_MAP_NAME_COLOUR,
         curses::COLOR_YELLOW,
