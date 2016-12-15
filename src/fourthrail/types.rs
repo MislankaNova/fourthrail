@@ -34,9 +34,10 @@ pub enum Tile {
 
 impl CanDisplay for Tile {
     fn display(&self) -> Display {
-        match self {
-            &Tile::Tile {pair: p, symbol: c, ..} => (p, c),
-            _ => (-1, ' '),
+        if let &Tile::Tile {pair: p, symbol: c, ..} = self {
+            (p, c)
+        } else {
+            (-1, ' ')
         }
     }
 }
