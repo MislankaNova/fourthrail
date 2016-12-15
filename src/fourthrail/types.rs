@@ -26,9 +26,11 @@ pub enum Tile {
     Tile {
         name   : &'static str,
         symbol : char,
-        fore : i16,
-        back : i16,
-        pair : i16
+        fore   : i16,
+        back   : i16,
+        pair   : i16,
+        opaque : bool,
+        solid  : bool
     }
 }
 
@@ -48,7 +50,27 @@ pub struct TileBuilder {
     fore   : i16,
     back   : i16,
     attr   : i16,
-    pair   : i16
+    pair   : i16,
+    opaque : bool,
+    solid  : bool
+}
+
+impl Tile {
+    pub fn isOpaque(&self) -> bool {
+        if let &Tile::Tile(opaque: o, ..) = self {
+            o
+        } else {
+            false
+        }
+    }
+
+    pub fn isSolid(&self) -> bool {
+        if let &Tile::Tile(solid: s, ..) = self {
+            s
+        } else {
+            true
+        }
+    }
 }
 
 impl TileBuilder {
@@ -59,7 +81,9 @@ impl TileBuilder {
             fore: 0,
             back: 0,
             attr: 0,
-            pair: 0
+            pair: 0,
+            opaque: false,
+            solid: false
         }
     }
 
@@ -69,7 +93,9 @@ impl TileBuilder {
             symbol: self.symbol,
             fore: self.fore,
             back: self.back,
-            pair: self.pair
+            pair: self.pair,
+            opaque: self.opaque,
+            solid: self.solid
         }
     }
 
@@ -94,6 +120,18 @@ impl TileBuilder {
         self.back = back;
         self.pair = pair;
         curses::init_pair(pair, fore, back);
+        self
+    }
+
+    pub fn opaque(&mut self, opaque: bool)
+                      -> &mut TileBuilder {
+        self.opaque = opaque;
+        self
+    }
+
+    pub fn solid(&mut self, solid: bool)
+                      -> &mut TileBuilder {
+        self.solid = solid;
         self
     }
 }

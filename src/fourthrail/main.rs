@@ -19,6 +19,8 @@ impl Fourthrail {
             .name("TileTile")
             .symbol('.')
             .colour(1, curses::COLOR_BLACK, curses::COLOR_WHITE)
+            .opaque(false)
+            .solid(false)
             .finalise();
         Fourthrail {
             window    : win,
