@@ -49,7 +49,15 @@ fn main () {
         (height - INNER_HEIGHT + 1) / 2,
         (width - INNER_WIDTH) / 2
         );
-    let mut fourthrail = main::Fourthrail::initialise(neww);
+    let t = types::TileBuilder::new()
+        .name("TileTile")
+        .symbol('.')
+        .colour(1, curses::COLOR_BLACK, curses::COLOR_WHITE)
+        .opaque(false)
+        .solid(false)
+        .finalise();
+    let r = types::Resource { tile_defs: vec![t] };
+    let mut fourthrail = main::Fourthrail::initialise(neww, &r);
 
     curses::flash();
     window.getch();

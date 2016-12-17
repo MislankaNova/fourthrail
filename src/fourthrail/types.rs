@@ -136,12 +136,17 @@ impl TileBuilder {
     }
 }
 
-pub struct Map {
+pub struct Map<'trip> {
     pub height : i32,
     pub width  : i32,
     pub level  : i32,
     pub name   : String,
-    pub tiles  : [types::Tile ; 14400]
+    pub tiles  : [&'trip types::Tile ; 14400]
+}
+
+// A collection of all pre-defined resources
+pub struct Resource {
+    pub tile_defs : Vec<types::Tile>
 }
 
 /* */

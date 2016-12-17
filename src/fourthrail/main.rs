@@ -6,31 +6,28 @@ use fourthrail::*;
 
 /* */
 
-pub struct Fourthrail {
+pub struct Fourthrail<'trip> {
     window    : curses::Window,
+    resource  : &'trip types::Resource,
+
     coherency : i32,
-    map       : types::Map
+    map       : types::Map<'trip>,
 }
 
-impl Fourthrail {
-    pub fn initialise(win : curses::Window) -> Fourthrail {
+impl<'trip> Fourthrail<'trip> {
+    pub fn initialise(win : curses::Window, r : &'trip types::Resource) -> Fourthrail<'trip> {
         let s = String::from("North Acton Station");
-        let t = types::TileBuilder::new()
-            .name("TileTile")
-            .symbol('.')
-            .colour(1, curses::COLOR_BLACK, curses::COLOR_WHITE)
-            .opaque(false)
-            .solid(false)
-            .finalise();
         Fourthrail {
             window    : win,
+            resource  : r,
+
             coherency : -10,
             map       : types::Map {
                 height : 120,
                 width  : 120,
                 level  : 1,
                 name   : s,
-                tiles  : [t; 14400]
+                tiles  : [&(r.tile_defs[0]); 14400]
             }
         }
     }
