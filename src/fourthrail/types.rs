@@ -9,12 +9,12 @@ use fourthrail::*;
 
 /* Type names */
 
-type Display = (i16, char);
+type Icon = (i16, char);
 
 /* Traits */
 
 pub trait Display {
-    fn display(&self) -> Display;
+    fn display(&self) -> Icon;
 }
 
 /* Structs & Enums */
@@ -35,7 +35,7 @@ pub enum Tile {
 }
 
 impl Display for Tile {
-    fn display(&self) -> Display {
+    fn display(&self) -> Icon {
         if let &Tile::Tile {pair: p, symbol: c, ..} = self {
             (p, c)
         } else {

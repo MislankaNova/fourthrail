@@ -6,7 +6,7 @@ use std::cmp::*;
 
 use fourthrail::*;
 
-use fourthrail::types::CanDisplay;
+use fourthrail::types::Display;
 
 /* */
 
