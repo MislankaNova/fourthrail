@@ -41,7 +41,7 @@ impl<'trip> Fourthrail<'trip> {
         // This is a hack
         // Without this the map cannot update properly
         self.window.border(' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ');
-        graphic::put_map(&self.window, &self.map);
+        graphic::put_map(&self.window, &self.map, (0, 0));
         graphic::put_stats(&self.window, &self.coherency);
         self.window.refresh();
     }

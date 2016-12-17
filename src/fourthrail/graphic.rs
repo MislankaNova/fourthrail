@@ -47,11 +47,12 @@ pub fn put_tile(win: &curses::Window, t: &types::Tile) {
     win.addch(c);
 }
 
-pub fn put_map(win: &curses::Window, map: &types::Map) {
-    for r in 0..min(map.height, MAP_DISPLAY_HEIGHT) {
+pub fn put_map(win: &curses::Window, map: &types::Map, start: (i32, i32)) {
+    let (sr, sc) = start;
+    for r in 0..min(map.height - sr, MAP_DISPLAY_HEIGHT) {
         win.mv(r, 0);
-        for c in 0..min(map.width, MAP_DISPLAY_WIDTH) {
-            put_tile(win, &map.tiles[(120 * r + c) as usize]);
+        for c in 0..min(map.width - sc, MAP_DISPLAY_WIDTH) {
+            put_tile(win, &map.tiles[(120 * (r + sr) + c + sc) as usize]);
         }
     }
     /* Then display level detail */
