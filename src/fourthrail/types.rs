@@ -13,7 +13,7 @@ type Display = (i16, char);
 
 /* Traits */
 
-pub trait CanDisplay {
+pub trait Display {
     fn display(&self) -> Display;
 }
 
@@ -34,7 +34,7 @@ pub enum Tile {
     }
 }
 
-impl CanDisplay for Tile {
+impl Display for Tile {
     fn display(&self) -> Display {
         if let &Tile::Tile {pair: p, symbol: c, ..} = self {
             (p, c)
@@ -100,13 +100,13 @@ impl TileBuilder {
     }
 
     pub fn name(&mut self, name: &'static str)
-                    -> &mut TileBuilder {
+            -> &mut TileBuilder {
         self.name = name;
         self
     }
 
     pub fn symbol(&mut self, symbol: char)
-                      -> &mut TileBuilder {
+            -> &mut TileBuilder {
         self.symbol = symbol;
         self
     }
@@ -115,7 +115,7 @@ impl TileBuilder {
                   pair: i16,
                   fore: i16,
                   back: i16)
-                      -> &mut TileBuilder {
+            -> &mut TileBuilder {
         self.fore = fore;
         self.back = back;
         self.pair = pair;
@@ -124,13 +124,13 @@ impl TileBuilder {
     }
 
     pub fn opaque(&mut self, opaque: bool)
-                      -> &mut TileBuilder {
+            -> &mut TileBuilder {
         self.opaque = opaque;
         self
     }
 
     pub fn solid(&mut self, solid: bool)
-                      -> &mut TileBuilder {
+            -> &mut TileBuilder {
         self.solid = solid;
         self
     }

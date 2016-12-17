@@ -63,10 +63,7 @@ pub fn put_map(win: &curses::Window, map: &types::Map) {
     win.addstr(" <");
 }
 
-pub fn put_stats(win    : &curses::Window,
-                     coh    : &i32,
-                     //status : &types::Status
-                     ) {
+pub fn put_stats(win: &curses::Window, coh: &i32) {
     let s_coh = coh.to_string();
     let start = MAP_DISPLAY_WIDTH + 1;
     win.attron(curses::A_BOLD);

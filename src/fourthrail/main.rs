@@ -15,7 +15,8 @@ pub struct Fourthrail<'trip> {
 }
 
 impl<'trip> Fourthrail<'trip> {
-    pub fn initialise(win : curses::Window, r : &'trip types::Resource) -> Fourthrail<'trip> {
+    pub fn initialise(win : curses::Window, r : &'trip types::Resource)
+            -> Fourthrail<'trip> {
         let s = String::from("North Acton Station");
         Fourthrail {
             window    : win,
