@@ -34,7 +34,6 @@ pub trait Named {
 /* Structs & Enums */
 
 // A single map tile
-#[derive (Clone, Copy)]
 pub enum Tile {
     Empty,
     Tile {
