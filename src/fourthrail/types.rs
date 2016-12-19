@@ -9,9 +9,15 @@ use fourthrail::*;
 
 /* Type names */
 
+pub type Coord = (i32, i32);
 type Icon = (i16, char);
 
 /* Traits */
+
+pub trait Agent {
+    // Force is yet to be defined.
+    //fn act(&self) -> Force;
+}
 
 pub trait Display {
     fn display(&self) -> Icon;
@@ -166,4 +172,56 @@ pub struct Status {
     strength    : i32,
     dexterity   : i32,
     status      : collections::HashMap<&'static str, i32>
+}
+
+/* */
+
+// A creature in the world
+pub struct Creature {
+    name   : String,
+    coord  : Coord,
+    symbol : char,
+    pair   : i16
+}
+
+impl Display for Creature {
+    fn display(&self) -> Icon {
+        (self.pair, self.symbol)
+    }
+}
+
+impl Position for Creature {
+    fn pos(&self) -> (i32, i32) {
+        self.coord
+    }
+}
+
+impl Named for Creature {
+    fn nym(&self) -> &str {
+        &self.name
+    }
+}
+
+impl Agent for Creature {
+    /*fn act(&self) -> Force {
+
+    }*/
+}
+
+pub struct CreatureBuilder {
+    name   : String,
+    coord  : Coord,
+    symbol : char,
+    pair   : i16
+}
+
+impl CreatureBuilder {
+    pub fn new_player() -> Creature {
+        Creature {
+            name   : "You".to_string(),
+            coord  : (2, 2),
+            symbol : '@',
+            pair   : 34
+        }
+    }
 }

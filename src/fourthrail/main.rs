@@ -12,6 +12,8 @@ pub struct Fourthrail<'trip> {
 
     coherency : i32,
     map       : types::Map<'trip>,
+
+    player    : types::Creature
 }
 
 impl<'trip> Fourthrail<'trip> {
@@ -29,7 +31,9 @@ impl<'trip> Fourthrail<'trip> {
                 level  : 1,
                 name   : s,
                 tiles  : [&(r.tile_defs[0]); 14400]
-            }
+            },
+
+            player    : types::CreatureBuilder::new_player()
         }
     }
 
@@ -43,6 +47,7 @@ impl<'trip> Fourthrail<'trip> {
         self.window.border(' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ');
         graphic::put_map(&self.window, &self.map, (0, 0));
         graphic::put_stats(&self.window, &self.coherency);
+        graphic::put_creature(&self.window, &self.player);
         self.window.refresh();
     }
 }

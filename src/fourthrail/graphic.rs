@@ -7,6 +7,7 @@ use std::cmp::*;
 use fourthrail::*;
 
 use fourthrail::types::Display;
+use fourthrail::types::Position;
 
 /* */
 
@@ -45,6 +46,14 @@ pub fn put_tile(win: &curses::Window, t: &types::Tile) {
     let (p, c) = t.display();
     win.color_set(p);
     win.addch(c);
+}
+
+pub fn put_creature(win: &curses::Window, c: &types::Creature) {
+    let (p, s) = c.display();
+    let (y, x) = c.pos();
+    win.mv(y, x);
+    win.color_set(p);
+    win.addch(s);
 }
 
 pub fn put_map(win: &curses::Window, map: &types::Map, start: (i32, i32)) {
