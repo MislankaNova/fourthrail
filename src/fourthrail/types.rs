@@ -70,7 +70,7 @@ pub struct TileBuilder {
 }
 
 impl Tile {
-    pub fn isOpaque(&self) -> bool {
+    pub fn is_opaque(&self) -> bool {
         if let &Tile::Tile { opaque: o, ..} = self {
             o
         } else {
@@ -78,7 +78,7 @@ impl Tile {
         }
     }
 
-    pub fn isSolid(&self) -> bool {
+    pub fn is_solid(&self) -> bool {
         if let &Tile::Tile { solid: s, .. } = self {
             s
         } else {
