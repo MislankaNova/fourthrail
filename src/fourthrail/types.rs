@@ -37,7 +37,7 @@ pub trait Named {
 pub enum Tile {
     Empty,
     Tile {
-        name   : &'static str,
+        name   : String,
         symbol : char,
         fore   : i16,
         back   : i16,
@@ -57,8 +57,18 @@ impl Display for Tile {
     }
 }
 
+impl Named for Tile {
+    fn nym(&self) -> &str {
+        if let &Tile::Tile {name: ref n, ..} = self {
+            &n
+        } else {
+            langue::VOID
+        }
+    }
+}
+
 pub struct TileBuilder {
-    name   : &'static str,
+    name   : String,
     symbol : char,
     fore   : i16,
     back   : i16,
@@ -89,7 +99,7 @@ impl Tile {
 impl TileBuilder {
     pub fn new() -> TileBuilder {
         TileBuilder {
-            name: "No Name",
+            name: String::from("No Name"),
             symbol: 'x',
             fore: 0,
             back: 0,
@@ -102,7 +112,7 @@ impl TileBuilder {
 
     pub fn finalise(&self) -> Tile {
         Tile::Tile {
-            name: self.name,
+            name: self.name.clone(),
             symbol: self.symbol,
             fore: self.fore,
             back: self.back,
@@ -112,7 +122,7 @@ impl TileBuilder {
         }
     }
 
-    pub fn name(&mut self, name: &'static str)
+    pub fn name(&mut self, name: String)
             -> &mut TileBuilder {
         self.name = name;
         self

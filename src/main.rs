@@ -50,7 +50,7 @@ fn main () {
         (width - INNER_WIDTH) / 2
         );
     let t = types::TileBuilder::new()
-        .name("TileTile")
+        .name(String::from("TileTile"))
         .symbol('.')
         .colour(1, curses::COLOR_BLACK, curses::COLOR_WHITE)
         .opaque(false)

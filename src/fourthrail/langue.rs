@@ -19,3 +19,6 @@ pub const DEXTERITY   : Parole = "DEXTERITY";
 
 pub const DRUNK       : Parole = "Drunk";
 pub const STONED      : Parole = "Stones";
+
+/* Dummy names */
+pub const VOID        : Parole = "Void";
