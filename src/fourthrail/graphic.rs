@@ -6,8 +6,8 @@ use std::cmp::*;
 
 use fourthrail::*;
 
-use fourthrail::types::Display;
-use fourthrail::types::Position;
+use fourthrail::typedefs::*;
+use fourthrail::traits::*;
 
 /* */
 

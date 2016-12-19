@@ -8,25 +8,7 @@ use std::*;
 use fourthrail::*;
 
 use fourthrail::typedefs::*;
-
-/* Traits */
-
-pub trait Agent {
-    // Force is yet to be defined.
-    //fn act(&self) -> Force;
-}
-
-pub trait Display {
-    fn display(&self) -> Icon;
-}
-
-pub trait Position {
-    fn pos(&self) -> Coord;
-}
-
-pub trait Named {
-    fn nym(&self) -> &str;
-}
+use fourthrail::traits::*;
 
 /* Structs & Enums */
 
