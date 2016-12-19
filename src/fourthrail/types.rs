@@ -17,6 +17,14 @@ pub trait Display {
     fn display(&self) -> Icon;
 }
 
+pub trait Position {
+    fn pos(&self) -> (i32, i32);
+}
+
+pub trait Named {
+    fn nym(&self) -> &str;
+}
+
 /* Structs & Enums */
 
 // A single map tile
