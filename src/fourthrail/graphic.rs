@@ -56,7 +56,7 @@ pub fn put_creature(win: &curses::Window, c: &types::Creature) {
     win.addch(s);
 }
 
-pub fn put_map(win: &curses::Window, map: &types::Map, start: (i32, i32)) {
+pub fn put_map(win: &curses::Window, map: &types::Map, start: Coord) {
     let (sr, sc) = start;
     for r in 0..min(map.height - sr, MAP_DISPLAY_HEIGHT) {
         win.mv(r, 0);

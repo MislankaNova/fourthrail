@@ -7,10 +7,7 @@ extern crate pancurses as curses;
 use std::*;
 use fourthrail::*;
 
-/* Type names */
-
-pub type Coord = (i32, i32);
-type Icon = (i16, char);
+use fourthrail::typedefs::*;
 
 /* Traits */
 
@@ -24,7 +21,7 @@ pub trait Display {
 }
 
 pub trait Position {
-    fn pos(&self) -> (i32, i32);
+    fn pos(&self) -> Coord;
 }
 
 pub trait Named {
@@ -200,7 +197,7 @@ impl Display for Creature {
 }
 
 impl Position for Creature {
-    fn pos(&self) -> (i32, i32) {
+    fn pos(&self) -> Coord {
         self.coord
     }
 }
