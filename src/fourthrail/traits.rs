@@ -1,10 +1,11 @@
 // Traits used by subte
 
+use fourthrail::*;
+
 use fourthrail::typedefs::*;
 
 pub trait Agent {
-    // Force is yet to be defined.
-    //fn act(&self) -> Force;
+    fn act(&self) -> types::Force;
 }
 
 pub trait Display {

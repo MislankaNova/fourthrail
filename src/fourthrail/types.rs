@@ -164,6 +164,12 @@ pub struct Status {
 
 /* */
 
+pub enum Force {
+    Probe
+}
+
+/* */
+
 // A creature in the world
 pub struct Creature {
     name   : String,
@@ -191,9 +197,9 @@ impl Named for Creature {
 }
 
 impl Agent for Creature {
-    /*fn act(&self) -> Force {
-
-    }*/
+    fn act(&self) -> Force {
+        Force::Probe
+    }
 }
 
 pub struct CreatureBuilder {
