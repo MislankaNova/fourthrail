@@ -60,6 +60,7 @@ fn main () {
     let mut fourthrail = main::Fourthrail::initialise(neww, &r);
 
     curses::flash();
+    window.keypad(true);
     window.getch();
 
     fourthrail.update_graphic();
