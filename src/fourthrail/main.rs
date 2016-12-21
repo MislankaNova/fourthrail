@@ -4,6 +4,8 @@ extern crate pancurses as curses;
 
 use fourthrail::*;
 
+use fourthrail::traits::Move;
+
 /* */
 
 pub struct Fourthrail<'trip> {
@@ -45,9 +47,9 @@ impl<'trip> Fourthrail<'trip> {
         // This is a hack
         // Without this the map cannot update properly
         self.window.border(' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ');
-        graphic::put_map(&self.window, &self.map, (0, 0));
+        graphic::put_map(&self.window, (0, 0), &self.map);
         graphic::put_stats(&self.window, &self.coherency);
-        graphic::put_creature(&self.window, &self.player);
+        graphic::put_creature(&self.window, (0, 0), &self.player);
         self.window.refresh();
     }
 }

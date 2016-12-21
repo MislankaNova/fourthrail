@@ -48,15 +48,24 @@ pub fn put_tile(win: &curses::Window, t: &types::Tile) {
     win.addch(c);
 }
 
-pub fn put_creature(win: &curses::Window, c: &types::Creature) {
-    let (p, s) = c.display();
-    let (y, x) = c.pos();
-    win.mv(y, x);
+pub fn put_creature(win: &curses::Window, start: Coord, cr: &types::Creature) {
+    let (sr, sc) = start;
+    let (p, s) = cr.display();
+    let (y, x) = cr.pos();
+    let r = y - sr;
+    let c = x - sc;
+    if r >= MAP_DISPLAY_HEIGHT
+        || r < 0
+        || c >= MAP_DISPLAY_WIDTH
+        || c < 0 {
+            return;
+    }
+    win.mv(r, c);
     win.color_set(p);
     win.addch(s);
 }
 
-pub fn put_map(win: &curses::Window, map: &types::Map, start: Coord) {
+pub fn put_map(win: &curses::Window, start: Coord, map: &types::Map) {
     let (sr, sc) = start;
     for r in 0..min(map.height - sr, MAP_DISPLAY_HEIGHT) {
         win.mv(r, 0);
