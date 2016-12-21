@@ -5,7 +5,7 @@ pub type Icon = (i16, char);
 
 // Unit enums
 
-enum Direction {
+pub enum Direction {
     W,
     NW,
     N,
