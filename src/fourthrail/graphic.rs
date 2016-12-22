@@ -6,9 +6,6 @@ use std::cmp::*;
 
 use fourthrail::*;
 
-use fourthrail::typedefs::*;
-use fourthrail::traits::*;
-
 /* */
 
 
@@ -42,13 +39,13 @@ pub fn init_display() {
         );
 }
 
-pub fn put_tile(win: &curses::Window, t: &types::Tile) {
+pub fn put_tile(win: &curses::Window, t: &Tile) {
     let (p, c) = t.display();
     win.color_set(p);
     win.addch(c);
 }
 
-pub fn put_creature(win: &curses::Window, start: Coord, cr: &types::Creature) {
+pub fn put_creature(win: &curses::Window, start: Coord, cr: &Creature) {
     let (sr, sc) = start;
     let (p, s) = cr.display();
     let (y, x) = cr.pos();
@@ -65,7 +62,7 @@ pub fn put_creature(win: &curses::Window, start: Coord, cr: &types::Creature) {
     win.addch(s);
 }
 
-pub fn put_map(win: &curses::Window, start: Coord, map: &types::Map) {
+pub fn put_map(win: &curses::Window, start: Coord, map: &Map) {
     let (sr, sc) = start;
     for r in 0..min(map.height - sr, MAP_DISPLAY_HEIGHT) {
         win.mv(r, 0);

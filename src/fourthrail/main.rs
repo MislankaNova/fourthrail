@@ -4,22 +4,20 @@ extern crate pancurses as curses;
 
 use fourthrail::*;
 
-use fourthrail::traits::Move;
-
 /* */
 
 pub struct Fourthrail<'trip> {
     window    : curses::Window,
-    resource  : &'trip types::Resource,
+    resource  : &'trip Resource,
 
     coherency : i32,
-    map       : types::Map<'trip>,
+    map       : Map<'trip>,
 
-    player    : types::Creature
+    player    : Creature
 }
 
 impl<'trip> Fourthrail<'trip> {
-    pub fn initialise(win : curses::Window, r : &'trip types::Resource)
+    pub fn initialise(win : curses::Window, r : &'trip Resource)
             -> Fourthrail<'trip> {
         let s = String::from("North Acton Station");
         Fourthrail {
@@ -27,7 +25,7 @@ impl<'trip> Fourthrail<'trip> {
             resource  : r,
 
             coherency : -10,
-            map       : types::Map {
+            map       : Map {
                 height : 120,
                 width  : 120,
                 level  : 1,
@@ -35,7 +33,7 @@ impl<'trip> Fourthrail<'trip> {
                 tiles  : [&(r.tile_defs[0]); 14400]
             },
 
-            player    : types::CreatureBuilder::new_player()
+            player    : CreatureBuilder::new_player()
         }
     }
 

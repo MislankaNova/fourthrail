@@ -2,14 +2,12 @@
 
 use fourthrail::*;
 
-use fourthrail::typedefs::*;
-
 pub trait Agent {
-    fn act(&self) -> types::Force;
+    fn act(&self) -> Force;
 }
 
 pub trait Move {
-    fn move_in(&mut self, typedefs::Direction);
+    fn move_in(&mut self, Direction);
     fn move_to(&mut self, Coord);
 }
 
