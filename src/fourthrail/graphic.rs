@@ -9,8 +9,9 @@ use fourthrail::*;
 /* */
 
 
-const MAP_DISPLAY_WIDTH  : i32 = 60;
-const MAP_DISPLAY_HEIGHT : i32 = 22;
+pub const MAP_DISPLAY_WIDTH  : i32 = 60;
+pub const MAP_DISPLAY_HEIGHT : i32 = 22;
+pub const MAP_DISPLAY_STEP   : i32 = 8 ;
 
 const DISPLAY_NONE             : i16 = 0;
 const DISPLAY_MAP_NAME_COLOUR  : i16 = 21;
