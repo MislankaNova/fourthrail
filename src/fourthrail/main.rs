@@ -13,7 +13,7 @@ pub struct Fourthrail<'trip> {
     resource  : &'trip Resource,
 
     coherency : i32,
-    map       : Map<'trip>,
+    map       : Map<&'trip Tile>,
 
     player    : Creature
 }
@@ -27,13 +27,7 @@ impl<'trip> Fourthrail<'trip> {
             resource  : r,
 
             coherency : -10,
-            map       : Map {
-                height : 120,
-                width  : 120,
-                level  : 1,
-                name   : s,
-                tiles  : [&(r.tile_defs[0]); 14400]
-            },
+            map       : Map::new(&(r.tile_defs[0])),
 
             player    : CreatureBuilder::new_player()
         }
@@ -71,7 +65,7 @@ impl<'trip> Fourthrail<'trip> {
         pr = graphic::MAP_DISPLAY_STEP * (pr / graphic::MAP_DISPLAY_STEP);
         pc = graphic::MAP_DISPLAY_STEP * (pc / graphic::MAP_DISPLAY_STEP);
         let start = (pr, pc);
-        
+
         // This is a hack
         // Without this the map cannot update properly
         self.window.border(' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ');

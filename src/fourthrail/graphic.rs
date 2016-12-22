@@ -63,21 +63,14 @@ pub fn put_creature(win: &curses::Window, start: Coord, cr: &Creature) {
     win.addch(s);
 }
 
-pub fn put_map(win: &curses::Window, start: Coord, map: &Map) {
+pub fn put_map(win: &curses::Window, start: Coord, map: &Map<&Tile>) {
     let (sr, sc) = start;
-    for r in 0..min(map.height - sr, MAP_DISPLAY_HEIGHT) {
+    for r in 0..min(MAP_HEIGHT - sr, MAP_DISPLAY_HEIGHT) {
         win.mv(r, 0);
-        for c in 0..min(map.width - sc, MAP_DISPLAY_WIDTH) {
-            put_tile(win, &map.tiles[(120 * (r + sr) + c + sc) as usize]);
+        for c in 0..min(MAP_WIDTH - sc, MAP_DISPLAY_WIDTH) {
+            put_tile(win, map.get_tile((r + sr, c + sc)));
         }
     }
-    /* Then display level detail */
-    win.color_set(DISPLAY_MAP_NAME_COLOUR);
-    win.attron(curses::A_BOLD);
-    win.mv(MAP_DISPLAY_HEIGHT, 0);
-    win.addstr("> ");
-    win.addstr(&map.name);
-    win.addstr(" <");
 }
 
 pub fn put_stats(win: &curses::Window, coh: &i32) {
