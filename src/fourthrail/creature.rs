@@ -33,6 +33,10 @@ impl Agent for Creature {
 }
 
 impl Move for Creature {
+    fn get_coord(&self) -> Coord {
+        self.coord
+    }
+
     fn move_in(&mut self, d: Direction) {
         let (r, c) = self.coord;
         match d {
