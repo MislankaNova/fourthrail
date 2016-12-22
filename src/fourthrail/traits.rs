@@ -7,6 +7,7 @@ pub trait Agent {
 }
 
 pub trait Move {
+    fn get_coord(&self) -> Coord;
     fn move_in(&mut self, Direction);
     fn move_to(&mut self, Coord);
 }
