@@ -3,6 +3,7 @@
 pub mod fourthrail {
     pub mod langue;
     pub mod graphic;
+    pub mod shadow;
     pub mod main;
 
     pub mod typedef;
