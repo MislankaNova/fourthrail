@@ -71,7 +71,7 @@ pub fn put_map(win: &curses::Window,
     for r in 0..min(MAP_HEIGHT - sr, MAP_DISPLAY_HEIGHT) {
         win.mv(r, 0);
         for c in 0..min(MAP_WIDTH - sc, MAP_DISPLAY_WIDTH) {
-            if mem.get_tile((r, c)) == Visibility::Unseen {
+            if mem.get_tile((r + sr, c + sc)) == Visibility::Unseen {
                 win.color_set(DISPLAY_NONE);
                 win.addch(' ');
             } else {
