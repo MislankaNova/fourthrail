@@ -63,12 +63,20 @@ pub fn put_creature(win: &curses::Window, start: Coord, cr: &Creature) {
     win.addch(s);
 }
 
-pub fn put_map(win: &curses::Window, start: Coord, map: &Map<&Tile>) {
+pub fn put_map(win: &curses::Window,
+        start: Coord,
+        map: &Map<&Tile>,
+        mem: &Map<Visibility>) {
     let (sr, sc) = start;
     for r in 0..min(MAP_HEIGHT - sr, MAP_DISPLAY_HEIGHT) {
         win.mv(r, 0);
         for c in 0..min(MAP_WIDTH - sc, MAP_DISPLAY_WIDTH) {
-            put_tile(win, map.get_tile((r + sr, c + sc)));
+            if mem.get_tile((r, c)) == Visibility::Unseen {
+                win.color_set(DISPLAY_NONE);
+                win.addch(' ');
+            } else {
+                put_tile(win, map.get_tile((r + sr, c + sc)));
+            }
         }
     }
 }

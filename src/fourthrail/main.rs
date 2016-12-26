@@ -14,6 +14,7 @@ pub struct Fourthrail<'trip> {
 
     coherency : i32,
     map       : Map<&'trip Tile>,
+    map_memory: Map<Visibility>,
 
     player    : Creature
 }
@@ -28,6 +29,7 @@ impl<'trip> Fourthrail<'trip> {
 
             coherency : -10,
             map       : Map::new(&(r.tile_defs[0])),
+            map_memory: Map::new(Visibility::Unseen),
 
             player    : CreatureBuilder::new_player()
         }
@@ -54,6 +56,33 @@ impl<'trip> Fourthrail<'trip> {
 
             _ => ()
         }
+
+        self.update_memory();
+        self.update_visibility();
+    }
+
+    pub fn update_memory(&mut self) {
+        for r in 0..MAP_HEIGHT {
+            for c in 0..MAP_WIDTH {
+                if self.map_memory.get_tile((r, c)) == Visibility::Visible {
+                    self.map_memory.set_tile((r, c), Visibility::Seen);
+                }
+            }
+        }
+    }
+
+    pub fn update_visibility(&mut self) {
+        let current = self.player.get_coord();
+        let coords = shadow::circle(&current, 6);
+        for c in coords {
+            let line = shadow::line(&current, &c);
+            for d in line {
+                self.map_memory.set_tile(d, Visibility::Visible);
+                if self.map.get_tile(d).is_opaque() {
+                    break;
+                }
+            }
+        }
     }
 
     pub fn update_graphic(&self) {
@@ -69,7 +98,7 @@ impl<'trip> Fourthrail<'trip> {
         // This is a hack
         // Without this the map cannot update properly
         self.window.border(' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ');
-        graphic::put_map(&self.window, start, &self.map);
+        graphic::put_map(&self.window, start, &self.map, &self.map_memory);
         graphic::put_stats(&self.window, &self.coherency);
         graphic::put_creature(&self.window, start, &self.player);
         self.window.refresh();

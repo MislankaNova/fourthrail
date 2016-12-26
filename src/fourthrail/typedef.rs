@@ -20,3 +20,10 @@ pub enum Direction {
     Up,
     Down
 }
+
+#[derive(Copy, Clone, PartialEq, Eq)]
+pub enum Visibility {
+    Unseen,
+    Seen,
+    Visible
+}
