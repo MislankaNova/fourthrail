@@ -49,14 +49,21 @@ fn main () {
         (height - INNER_HEIGHT + 1) / 2,
         (width - INNER_WIDTH) / 2
         );
-    let t = TileBuilder::new()
+    let t1 = TileBuilder::new()
         .name(String::from("TileTile"))
         .symbol('.')
-        .colour(1, curses::COLOR_BLACK, curses::COLOR_WHITE)
+        .colour(1, curses::COLOR_WHITE, curses::COLOR_BLACK)
         .opaque(false)
         .solid(false)
         .finalise();
-    let r = Resource { tile_defs: vec![t] };
+    let t2 = TileBuilder::new()
+        .name(String::from("BadTile"))
+        .symbol('#')
+        .colour(2, curses::COLOR_WHITE, curses::COLOR_BLACK)
+        .opaque(true)
+        .solid(true)
+        .finalise();
+    let r = Resource { tile_defs: vec![t1, t2] };
     let mut fourthrail = main::Fourthrail::initialise(neww, &r);
 
     curses::flash();
