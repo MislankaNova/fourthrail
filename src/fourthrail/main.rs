@@ -23,12 +23,19 @@ impl<'trip> Fourthrail<'trip> {
     pub fn initialise(win : curses::Window, r : &'trip Resource)
             -> Fourthrail<'trip> {
         let s = String::from("North Acton Station");
+        let mut map = Map::new(&(r.tile_defs[0]));
+        for row in 3..8 {
+            for col in 4..6 {
+                map.set_tile((row * 3, col * 4), &(r.tile_defs[1]));
+                map.set_tile((row * 3, col * 4 + 1), &(r.tile_defs[1]));
+            }
+        }
         Fourthrail {
             window    : win,
             resource  : r,
 
             coherency : -10,
-            map       : Map::new(&(r.tile_defs[0])),
+            map       : map,
             map_memory: Map::new(Visibility::Unseen),
 
             player    : CreatureBuilder::new_player()
