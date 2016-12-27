@@ -38,18 +38,7 @@ impl Move for Creature {
     }
 
     fn move_in(&mut self, d: Direction) {
-        let (r, c) = self.coord;
-        match d {
-            Direction::W  => self.coord = (r    , c - 1),
-            Direction::NW => self.coord = (r - 1, c - 1),
-            Direction::N  => self.coord = (r - 1, c    ),
-            Direction::NE => self.coord = (r - 1, c + 1),
-            Direction::E  => self.coord = (r    , c + 1),
-            Direction::SE => self.coord = (r + 1, c + 1),
-            Direction::S  => self.coord = (r + 1, c    ),
-            Direction::SW => self.coord = (r + 1, c - 1),
-            _ => {}
-        }
+        self.coord = next_coord(self.coord, d);
     }
 
     fn move_to(&mut self, c: Coord) {

@@ -43,25 +43,8 @@ impl<'trip> Fourthrail<'trip> {
     }
 
     pub fn turn(&mut self, key : curses::Input) {
-        match key {
-            curses::Input::Character('h')
-            | curses::Input::KeyLeft => self.player.move_in(Direction::W),
-
-            curses::Input::Character('j')
-            | curses::Input::KeyDown => self.player.move_in(Direction::S),
-
-            curses::Input::Character('k')
-            | curses::Input::KeyUp => self.player.move_in(Direction::N),
-
-            curses::Input::Character('l')
-            | curses::Input::KeyRight => self.player.move_in(Direction::E),
-
-            curses::Input::Character('u') => self.player.move_in(Direction::NW),
-            curses::Input::Character('i') => self.player.move_in(Direction::NE),
-            curses::Input::Character('n') => self.player.move_in(Direction::SW),
-            curses::Input::Character('m') => self.player.move_in(Direction::SE),
-
-            _ => ()
+        if let Some(d) = input_to_direction(key) {
+            self.player.move_in(d);
         }
 
         self.update_memory();
