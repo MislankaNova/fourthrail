@@ -44,11 +44,24 @@ impl<'trip> Fourthrail<'trip> {
 
     pub fn turn(&mut self, key : curses::Input) {
         if let Some(d) = input_to_direction(key) {
-            self.player.move_in(d);
+            self.player_move(d);
         }
 
         self.update_memory();
         self.update_visibility();
+    }
+
+    pub fn player_move(&mut self, d: Direction) {
+        let current = self.player.get_coord();
+        let (nr, nc) = next_coord(current, d);
+        if     nr < 0 || nr >= MAP_HEIGHT
+            || nc < 0 || nc >= MAP_WIDTH {
+            ()
+        } else if self.map.get_tile((nr, nc)).is_solid() {
+            ()
+        } else {
+            self.player.move_in(d);
+        }
     }
 
     pub fn update_memory(&mut self) {
