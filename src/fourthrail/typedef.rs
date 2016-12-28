@@ -10,6 +10,7 @@ pub type Icon = (i16, char);
 
 // Unit enums
 
+#[derive(Copy, Clone, PartialEq, Eq)]
 pub enum Direction {
     W,
     NW,
