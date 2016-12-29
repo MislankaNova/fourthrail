@@ -22,3 +22,6 @@ pub const STONED      : Parole = "Stones";
 
 /* Dummy names */
 pub const VOID        : Parole = "Void";
+
+/* Message related */
+pub const MESSAGE_BLOCK_CONNECTOR : Parole = " ";

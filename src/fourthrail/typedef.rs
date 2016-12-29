@@ -7,6 +7,8 @@ use std::collections::*;
 pub type Coord = (i32, i32);
 pub type Coords = BTreeSet<Coord>;
 pub type Icon = (i16, char);
+pub type MessageBlock = (i16, String);
+pub type Message = Vec<MessageBlock>;
 
 // Unit enums
 

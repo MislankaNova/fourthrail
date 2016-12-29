@@ -3,6 +3,7 @@
 extern crate pancurses as curses;
 
 use std::cmp::*;
+use std::collections::*;
 
 use fourthrail::*;
 
@@ -16,6 +17,8 @@ enum GameState {
 
 pub struct Fourthrail<'trip> {
     state     : GameState,
+    messages  : VecDeque<Message>,
+    new_message: bool,
 
     window    : curses::Window,
     resource  : &'trip Resource,
@@ -40,6 +43,8 @@ impl<'trip> Fourthrail<'trip> {
         }
         Fourthrail {
             state     : GameState::Map,
+            messages  : VecDeque::with_capacity(102),
+            new_message: false,
 
             window    : win,
             resource  : r,
@@ -50,6 +55,15 @@ impl<'trip> Fourthrail<'trip> {
 
             player    : CreatureBuilder::new_player()
         }
+    }
+
+    pub fn add_message(&mut self, msg: Message) {
+        self.messages.push_front(msg);
+        if self.messages.len() == 102 {
+            self.messages.pop_back();
+        }
+
+        self.new_message = true;
     }
 
     pub fn turn(&mut self, key : curses::Input) {
@@ -103,7 +117,7 @@ impl<'trip> Fourthrail<'trip> {
         }
     }
 
-    pub fn update_graphic(&self) {
+    pub fn update_graphic(&mut self) {
         // This is a hack
         // Without this the map cannot update properly
         self.window.border(' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ');
@@ -117,6 +131,10 @@ impl<'trip> Fourthrail<'trip> {
             GameState::Message => ()
         }
 
+        if self.new_message {
+            self.new_message = false;
+            self.show_last_message();
+        }
         self.window.refresh();
     }
 
@@ -136,5 +154,15 @@ impl<'trip> Fourthrail<'trip> {
 
     fn show_status(&self) {
         graphic::put_stats(&self.window, &self.coherency);
+    }
+
+    fn show_last_message(&self) {
+        if let Some(msg) = self.messages.get(0) {
+            graphic::put_last_message(&self.window, &msg);
+        }
+    }
+
+    fn show_all_messages(&self) {
+        graphic::put_all_messages(&self.window, &self.messages);
     }
 }

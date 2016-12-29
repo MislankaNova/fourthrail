@@ -3,6 +3,7 @@
 extern crate pancurses as curses;
 
 use std::cmp::*;
+use std::collections::*;
 
 use fourthrail::*;
 
@@ -93,4 +94,30 @@ pub fn put_stats(win: &curses::Window, coh: &i32) {
     win.mvaddstr(1, start, langue::COHERENCY);
     win.mvaddstr(2, start, &s_coh);
     win.mvaddstr(4, start, langue::STAMINA);
+}
+
+pub fn put_message(win: &curses::Window, msg: &Message) {
+    for block in msg {
+        let (p, ref s) = *block;
+        win.color_set(p);
+        win.addstr(&s);
+        win.addstr(langue::MESSAGE_BLOCK_CONNECTOR);
+    }
+}
+
+pub fn put_last_message(win: &curses::Window, msg: &Message) {
+    win.mv(INNER_HEIGHT - 1, 0);
+    win.deleteln();
+    put_message(win, msg);
+}
+
+pub fn put_all_messages(win: &curses::Window, msgs: &VecDeque<Message>) {
+    let mut i = (*msgs).iter();
+    for r in 0..INNER_HEIGHT {
+        win.mv(INNER_HEIGHT - r - 1, 0);
+        win.clrtoeol();
+        if let Some(msg) = i.next() {
+            put_message(win, msg);
+        }
+    }
 }
