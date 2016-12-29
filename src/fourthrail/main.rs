@@ -87,7 +87,10 @@ impl<'trip> Fourthrail<'trip> {
             || nc < 0 || nc >= MAP_WIDTH {
             ()
         } else if self.map.get_tile((nr, nc)).is_solid() {
-            ()
+            let mut msg = Vec::with_capacity(2);
+            msg.push((34, String::from("You")));
+            msg.push((1, String::from("ran into a wall.")));
+            self.add_message(msg);
         } else {
             self.player.move_in(d);
         }
