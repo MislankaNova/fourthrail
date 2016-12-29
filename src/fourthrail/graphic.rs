@@ -8,6 +8,10 @@ use fourthrail::*;
 
 /* */
 
+pub const INNER_HEIGHT : i32 = 24;
+pub const INNER_WIDTH  : i32 = 80;
+
+/* */
 
 pub const MAP_DISPLAY_WIDTH  : i32 = 60;
 pub const MAP_DISPLAY_HEIGHT : i32 = 22;

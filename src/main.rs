@@ -8,11 +8,6 @@ use fourthrail::fourthrail::*;
 
 /* */
 
-const INNER_HEIGHT : i32 = 24;
-const INNER_WIDTH  : i32 = 80;
-
-/* */
-
 fn main () {
     // Initialise curses first.
     let window = curses::initscr();
@@ -20,15 +15,15 @@ fn main () {
 
     // Then check terminal size.
     match (height, width) {
-        (h, w) if h < INNER_HEIGHT || w < INNER_WIDTH => {
+        (h, w) if h < graphic::INNER_HEIGHT || w < graphic::INNER_WIDTH => {
             curses::endwin();
             println!("\nTerminal too small.\n");
             return;
         }
-        (h, w) if h > INNER_HEIGHT => {
+        (h, w) if h > graphic::INNER_HEIGHT => {
             window.mvprintw(
-                (h - INNER_HEIGHT - 1) / 2,
-                (w - INNER_WIDTH) / 2,
+                (h - graphic::INNER_HEIGHT - 1) / 2,
+                (w - graphic::INNER_WIDTH) / 2,
                 "> Subte <"
                 );
         }
@@ -44,10 +39,10 @@ fn main () {
     graphic::init_display();
 
     let neww = curses::newwin(
-        INNER_HEIGHT,
-        INNER_WIDTH,
-        (height - INNER_HEIGHT + 1) / 2,
-        (width - INNER_WIDTH) / 2
+        graphic::INNER_HEIGHT,
+        graphic::INNER_WIDTH,
+        (height - graphic::INNER_HEIGHT + 1) / 2,
+        (width - graphic::INNER_WIDTH) / 2
         );
     let t1 = TileBuilder::new()
         .name(String::from("TileTile"))
