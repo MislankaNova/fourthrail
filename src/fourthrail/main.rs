@@ -8,7 +8,15 @@ use fourthrail::*;
 
 /* */
 
+#[derive(Copy, Clone, PartialEq, Eq)]
+enum GameState {
+    Map,
+    Message
+}
+
 pub struct Fourthrail<'trip> {
+    state     : GameState,
+
     window    : curses::Window,
     resource  : &'trip Resource,
 
@@ -31,6 +39,8 @@ impl<'trip> Fourthrail<'trip> {
             }
         }
         Fourthrail {
+            state     : GameState::Map,
+
             window    : win,
             resource  : r,
 
@@ -43,12 +53,17 @@ impl<'trip> Fourthrail<'trip> {
     }
 
     pub fn turn(&mut self, key : curses::Input) {
-        if let Some(d) = input_to_direction(key) {
-            self.player_move(d);
+        match self.state {
+            GameState::Map => {
+                if let Some(d) = input_to_direction(key) {
+                    self.player_move(d);
+                    self.update_memory();
+                    self.update_visibility();
+                }
+            },
+            
+            GameState::Message => ()
         }
-
-        self.update_memory();
-        self.update_visibility();
     }
 
     pub fn player_move(&mut self, d: Direction) {
