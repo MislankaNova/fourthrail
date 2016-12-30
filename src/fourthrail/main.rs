@@ -145,10 +145,12 @@ impl<'trip> Fourthrail<'trip> {
         let (mut pr, mut pc) = self.player.get_coord();
         pr -= (graphic::MAP_DISPLAY_HEIGHT - graphic::MAP_DISPLAY_STEP) / 2;
         pc -= (graphic::MAP_DISPLAY_WIDTH - graphic::MAP_DISPLAY_STEP) / 2;
-        pr = min(max(pr, 0), 120 - graphic::MAP_DISPLAY_WIDTH);
-        pc = min(max(pc, 0), 120 - graphic::MAP_DISPLAY_HEIGHT);
+        pr = max(pr, 0);
+        pc = max(pc, 0);
         pr = graphic::MAP_DISPLAY_STEP * (pr / graphic::MAP_DISPLAY_STEP);
         pc = graphic::MAP_DISPLAY_STEP * (pc / graphic::MAP_DISPLAY_STEP);
+        pr = min(pr, 120 - graphic::MAP_DISPLAY_HEIGHT);
+        pc = min(pc, 120 - graphic::MAP_DISPLAY_WIDTH);
         let start = (pr, pc);
 
         graphic::put_map(&self.window, start, &self.map, &self.map_memory);
