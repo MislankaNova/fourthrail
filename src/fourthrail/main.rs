@@ -73,10 +73,18 @@ impl<'trip> Fourthrail<'trip> {
                     self.player_move(d);
                     self.update_memory();
                     self.update_visibility();
+                } else {
+                    match key {
+                        curses::Input::Character('p') => {
+                            self.state = GameState::Message;
+                        }
+
+                        _ => ()
+                    }
                 }
             },
 
-            GameState::Message => ()
+            GameState::Message => self.state = GameState::Map
         }
     }
 
@@ -131,7 +139,7 @@ impl<'trip> Fourthrail<'trip> {
                 self.show_status();
             },
 
-            GameState::Message => ()
+            GameState::Message => self.show_all_messages()
         }
 
         if self.new_message {
