@@ -14,12 +14,6 @@ impl Display for Creature {
     }
 }
 
-impl Position for Creature {
-    fn pos(&self) -> Coord {
-        self.coord
-    }
-}
-
 impl Named for Creature {
     fn nym(&self) -> &str {
         &self.name
@@ -32,8 +26,8 @@ impl Agent for Creature {
     }
 }
 
-impl Move for Creature {
-    fn get_coord(&self) -> Coord {
+impl Position for Creature {
+    fn pos(&self) -> Coord {
         self.coord
     }
 

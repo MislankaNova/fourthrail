@@ -6,18 +6,14 @@ pub trait Agent {
     fn act(&self) -> Force;
 }
 
-pub trait Move {
-    fn get_coord(&self) -> Coord;
+pub trait Position {
+    fn pos(&self) -> Coord;
     fn move_in(&mut self, Direction);
     fn move_to(&mut self, Coord);
 }
 
 pub trait Display {
     fn display(&self) -> Icon;
-}
-
-pub trait Position {
-    fn pos(&self) -> Coord;
 }
 
 pub trait Named {

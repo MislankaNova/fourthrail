@@ -89,7 +89,7 @@ impl<'trip> Fourthrail<'trip> {
     }
 
     pub fn player_move(&mut self, d: Direction) {
-        let current = self.player.get_coord();
+        let current = self.player.pos();
         let (nr, nc) = next_coord(current, d);
         if     nr < 0 || nr >= MAP_HEIGHT
             || nc < 0 || nc >= MAP_WIDTH {
@@ -115,7 +115,7 @@ impl<'trip> Fourthrail<'trip> {
     }
 
     pub fn update_visibility(&mut self) {
-        let current = self.player.get_coord();
+        let current = self.player.pos();
         let coords = shadow::circle(&current, 6);
         for c in coords {
             let line = shadow::line(&current, &c);
@@ -150,7 +150,7 @@ impl<'trip> Fourthrail<'trip> {
     }
 
     fn show_map(&self) {
-        let (mut pr, mut pc) = self.player.get_coord();
+        let (mut pr, mut pc) = self.player.pos();
         pr -= (graphic::MAP_DISPLAY_HEIGHT - graphic::MAP_DISPLAY_STEP) / 2;
         pc -= (graphic::MAP_DISPLAY_WIDTH - graphic::MAP_DISPLAY_STEP) / 2;
         pr = max(pr, 0);
