@@ -26,4 +26,7 @@ pub mod fourthrail {
 
     pub mod creature;
     pub use self::creature::*;
+
+    pub mod item;
+    pub use self::item::*;
 }

@@ -27,7 +27,9 @@ pub struct Fourthrail<'trip> {
     map       : Map<&'trip Tile>,
     map_memory: Map<Visibility>,
 
-    player    : Creature
+    player    : Creature,
+
+    items     : Vec<Item>
 }
 
 impl<'trip> Fourthrail<'trip> {
@@ -53,7 +55,9 @@ impl<'trip> Fourthrail<'trip> {
             map       : map,
             map_memory: Map::new(Visibility::Unseen),
 
-            player    : CreatureBuilder::new_player()
+            player    : CreatureBuilder::new_player(),
+
+            items     : vec![ItemBuilder::new_sicp()]
         }
     }
 
@@ -162,6 +166,11 @@ impl<'trip> Fourthrail<'trip> {
         let start = (pr, pc);
 
         graphic::put_map(&self.window, start, &self.map, &self.map_memory);
+        
+        for i in self.items.iter() {
+            graphic::put_agent(&self.window, start, i);
+        }
+
         graphic::put_agent(&self.window, start, &self.player);
     }
 
