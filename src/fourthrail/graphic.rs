@@ -51,7 +51,7 @@ pub fn put_tile(win: &curses::Window, t: &Tile) {
     win.addch(c);
 }
 
-pub fn put_creature(win: &curses::Window, start: Coord, cr: &Creature) {
+pub fn put_agent<T: Display + Position>(win: &curses::Window, start: Coord, cr: &T) {
     let (sr, sc) = start;
     let (p, s) = cr.display();
     let (y, x) = cr.pos();

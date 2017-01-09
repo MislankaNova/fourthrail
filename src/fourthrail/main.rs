@@ -162,7 +162,7 @@ impl<'trip> Fourthrail<'trip> {
         let start = (pr, pc);
 
         graphic::put_map(&self.window, start, &self.map, &self.map_memory);
-        graphic::put_creature(&self.window, start, &self.player);
+        graphic::put_agent(&self.window, start, &self.player);
     }
 
     fn show_status(&self) {
