@@ -4,7 +4,7 @@ version = "0.1.0"
 authors = ["MislankaNova <MislankaNova@hotmail.com>"]
 
 [dependencies.pancurses]
-version = "0.7.0"
+version = "0.8"
 features = ["wide"]
 
 [lib]
